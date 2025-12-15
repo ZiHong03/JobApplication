@@ -1,0 +1,66 @@
+﻿@model IEnumerable<JobApplication.Models.JobApplicationsModel>
+@using JobApplication.Models
+
+@{
+    Layout = "~/Views/Shared/Employer_Layout.cshtml";
+}
+
+<h2>Applicants</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Apply Time</th>
+            <th>Status</th>
+            <th>CV</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.User?.Name</td>
+                <td>@app.User?.Email</td>
+                <td>@app.User?.PhoneNumber</td>
+                <td>@app.ApplyTime</td>
+                <td>@app.Status</td>
+
+                <td>
+                    @if (!string.IsNullOrEmpty(app.CVFilePath))
+                    {
+                        <a asp-controller="Employer"
+                           asp-action="DownloadCV"
+                           asp-route-applicationId="@app.ApplicationID"
+                           class="btn btn-sm btn-outline-primary">
+                            Download CV
+                        </a>
+
+                    }
+                </td>
+
+                <td>
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="applicationId" value="@app.ApplicationID" />
+
+                        <select name="status" class="form-control">
+                            @foreach (ApplicationStatus s in Enum.GetValues(typeof(ApplicationStatus)))
+                            {
+                                <option value="@s" selected="@(s == app.Status)">
+                                    @s
+                                </option>
+                            }
+                        </select>
+
+
+                        <button class="btn btn-primary btn-sm mt-1">Update</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

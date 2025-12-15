@@ -1,0 +1,49 @@
+﻿@model IEnumerable<JobApplication.Models.JobModel>
+
+@{
+    Layout = "~/Views/Shared/Employer_Layout.cshtml";
+}
+
+<h2>Employer Dashboard</h2>
+
+<div class="mb-3 text-end">
+    <a asp-controller="Employer" asp-action="Create" class="btn btn-success">
+        + Create New Job
+    </a>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Created</th>
+            <th>Applications</th>
+            <th>Job Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var job in Model)
+        {
+            <tr>
+                <td>@job.CompanyName</td>
+                <td>@job.JobTitle</td>
+                <td>@job.Location</td>
+                <td>@job.Salary</td>
+                <td>@job.CreatedAt.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Applications" asp-route-jobId="@job.JobID" class="btn btn-primary btn-sm">
+                        View Applications (@(job.Applications?.Count ?? 0))
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="JobDetail" asp-route-jobid="@job.JobID" class="btn btn-primary btn-sm">
+                        Job Details
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

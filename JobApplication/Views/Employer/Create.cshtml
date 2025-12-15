@@ -1,0 +1,41 @@
+﻿@model JobApplication.Models.JobModel
+
+@{
+    Layout = "~/Views/Shared/Employer_Layout.cshtml";
+}
+<h2>Create New Job</h2>
+
+<form asp-action="Create" method="post">
+
+    <input type="hidden" asp-for="EmployerID" />
+
+    <div class="mb-3">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" class="form-control" readonly />
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="JobTitle"></label>
+        <input asp-for="JobTitle" class="form-control" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Remark"></label>
+        <textarea asp-for="Remark" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Job</button>
+</form>

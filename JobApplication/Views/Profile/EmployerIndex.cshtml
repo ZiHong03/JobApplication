@@ -1,0 +1,35 @@
+﻿@model JobApplication.Models.UserModel
+
+@{
+    Layout = "~/Views/Shared/Employer_Layout.cshtml";
+}
+
+<h2>Profile</h2>
+
+<div class="card p-4 shadow" style="max-width:600px;">
+    <div class="mb-3">
+        <label><strong>Employer ID:</strong></label>
+        <p>@Model.UserID</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Employer Name:</strong></label>
+        <p>@Model.Name</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Email:</strong></label>
+        <p>@Model.Email</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Phone Number:</strong></label>
+        <p>@Model.PhoneNumber</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Role:</strong></label>
+        <p>@Model.Role</p>
+    </div>
+    <a class="btn btn-warning" href="@Url.Action("Edit", "Profile")">
+        Edit Profile
+    </a>
+    <br/>
+    <a asp-action="Dashboard" asp-controller="@Model.Role" class="btn btn-secondary">Back to Home</a>
+</div>

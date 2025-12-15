@@ -1,0 +1,33 @@
+﻿@model JobApplication.Models.UserModel
+
+<h2>Profile</h2>
+
+<div class="card p-4 shadow" style="max-width:600px;">
+    <div class="mb-3">
+        <label><strong>User ID:</strong></label>
+        <p>@Model.UserID</p>
+        <label><strong>Name:</strong></label>
+        <p>@Model.Name</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Email:</strong></label>
+        <p>@Model.Email</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Phone Number:</strong></label>
+        <p>@Model.PhoneNumber</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Skills:</strong></label>
+        <p>@Model.Skills</p>
+    </div>
+    <div class="mb-3">
+        <label><strong>Role:</strong></label>
+        <p>@Model.Role</p>
+    </div>
+    <a class="btn btn-warning" href="@Url.Action("Edit", "Profile")">
+        Edit Profile
+    </a>
+    <br />
+    <a asp-action="Dashboard" asp-controller="@Model.Role" class="btn btn-secondary">Back to Home</a>
+</div>

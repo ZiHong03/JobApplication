@@ -1,0 +1,18 @@
+﻿@model JobApplication.Models.JobModel
+
+<h2>Job Details</h2>
+
+<div class="card p-4 shadow">
+    <h3>@Model.JobTitle</h3>
+    <p><strong>Company Name:</strong> @Model.CompanyName</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Salary:</strong> RM @Model.Salary</p>
+    <p><strong>Job Description:</strong></p>
+    <p>@Model.Remark</p>
+
+    <div class="mt-3">
+        <a href="@Url.Action("Dashboard", "JobSeeker")" class="btn btn-secondary">
+            Back to Job List
+        </a>
+    </div>
+</div>

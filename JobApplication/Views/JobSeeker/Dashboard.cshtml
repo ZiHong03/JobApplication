@@ -1,0 +1,94 @@
+﻿@model List<JobApplication.Models.JobModel>
+
+<h2>Find Jobs</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<form method="get" asp-action="Dashboard">
+    <div class="input-group mb-3">
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search by job title, company, location..." />
+
+        <button type="submit" class="btn btn-primary">
+            Search
+        </button>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Company</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Apply</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var job in Model)
+        {
+            bool alreadyApplied = ViewBag.AppliedJob.Contains(job.JobID);
+            <tr>
+                <td>@job.CompanyName</td>
+                <td>@job.JobTitle</td>
+                <td>@job.Location</td>
+                <td>@job.Salary</td>
+
+                <td>
+                    @if (alreadyApplied)
+                    {
+                        <button class="btn btn-secondary" disabled>
+                            Already Applied
+                        </button>
+                    }
+                    else
+                    {
+                        <form asp-action="Apply"
+                              method="post"
+                              enctype="multipart/form-data">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="jobId"
+                                   value="@job.JobID" />
+
+                            <input type="file"
+                                   name="cvFile"
+                                   class="form-control mb-2"
+                                   accept=".pdf,.doc,.docx"
+                                   required />
+
+                            <button type="submit"
+                                    class="btn btn-success btn-sm">
+                                Apply with CV
+                            </button>
+                        </form>
+                    }
+                </td>
+
+                <td>
+                    <form asp-action="Details" method="get">
+                        <input type="hidden"
+                               name="jobID"
+                               value="@job.JobID" />
+
+                        <button type="submit" class="btn btn-info btn-sm">
+                            Detail
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
