@@ -17,6 +17,8 @@ Employer
 -Download the CV of the jobseekers
 -Profile (View and Edit)
 
+Database:
+SQLServer
 
 
 
